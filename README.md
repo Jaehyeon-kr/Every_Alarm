@@ -177,8 +177,9 @@ python scripts/true_inference.py --weights ./checkpoints/best.pt --img_path whit
 
 시각화 완료 → result_visualized.jpg 로 저장됨
 ```
-
-![Inference Result](imgs/infer_result.png)
+<div align="center">
+  <img src="imgs/infer_result.png" alt="Aug_" width="400">
+</div>
 
 ### Step 4: CoreML 모델 추출 (iOS 배포)
 
