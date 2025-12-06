@@ -1,5 +1,5 @@
 
-# Every_Alarm : 한 학기 알람을 쉽게!
+# Every_Alarm: Set Your Semester Alarms Effortlessly!
 ##
 ![img](white_test.jpg)
 
