@@ -529,7 +529,7 @@ Every Alarm은 단순히 알람을 끄는 것이 아니라, **게임을 완료�
 | ➕ **산수 게임** | ⭐⭐ 보통 | 5문제 정답 | 간단한 사칙연산 문제 풀이 |
 
 <div align="center">
-  <img src="imgs/games_overview.png" alt="미니게임 모음" width="800">
+  <img src="imgs/all_game.png" alt="미니게임 모음" width="800">
   <p><i>4가지 미니게임 화면 예시</i></p>
 </div>
 
