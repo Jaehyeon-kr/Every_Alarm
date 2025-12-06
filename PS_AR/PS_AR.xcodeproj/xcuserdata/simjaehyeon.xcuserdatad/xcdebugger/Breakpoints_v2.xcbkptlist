@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "338E6392-B9DA-4A2A-8D18-83CF228B79D6"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2FFF658-F0D9-49AB-BCA1-B82CB7569E14"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PS_AR/AppDatabase.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7"
+            endingLineNumber = "7"
+            landmarkName = "AppDatabase"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "E2FFF658-F0D9-49AB-BCA1-B82CB7569E14 - bf8be51aee6d18e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PS_AR.AppDatabase.__allocating_init() -&gt; PS_AR.AppDatabase"
+                  moduleName = "PS_AR.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simjaehyeon/Desktop/Personal_AR/PS_AR/AlarmMate/PS_AR/PS_AR/AppDatabase.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "E2FFF658-F0D9-49AB-BCA1-B82CB7569E14 - 3284688e82ce21e1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PS_AR.AppDatabase.() -&gt; PS_AR.AppDatabase.init() -&gt; PS_AR.AppDatabase"
+                  moduleName = "PS_AR.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simjaehyeon/Desktop/Personal_AR/PS_AR/AlarmMate/PS_AR/PS_AR/AppDatabase.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "8"
+                  endingLineNumber = "8">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
