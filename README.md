@@ -1,5 +1,15 @@
 
 # 에브리 알람: 한 학기 알람 설정을 쉽게! ( Every_Alarm: Set Your Semester Alarms Effortlessly! )
+
+
+## 소개  
+- Tech Process Sub  
+
+에브리타임 **스케쥴 형식의 학습 이미지**를 직접 원하는만큼 증강하여 제작하는 코드부터 **Yolo11n**을 train, inference하는 Process를 담은 코드를 제공합니다. 
+
+- Service Process Sub 
+
+**Every_ALARM**은 대학생들의 필수 어플 **에브리 타임의 시간표**를 바탕으로 자동으로 알람을 설정해주는 기능을 제공하는 **IOS Application** 입니다.
 ##
 ![img](pigma.png)
 
@@ -20,24 +30,11 @@
 
 ###
 
-## Introduction 
-- Tech Process Sub  
-
-에브리타임 **스케쥴 형식의 학습 이미지**를 직접 원하는만큼 증강하여 제작하는 코드부터 **Yolo11n**을 train, inference하는 Process를 담은 코드를 제공합니다. 
-
-- Service Process Sub 
-
-**Every_ALARM**은 대학생들의 필수 어플 **에브리 타임의 시간표**를 바탕으로 자동으로 알람을 설정해주는 기능을 제공하는 **IOS Application** 입니다.
-
-###
-
 ## Demo Video 
 
 
 
-
-
-###
+### 
 ## Yolo Tech  
 
 **Step 1. Make Train Data**
