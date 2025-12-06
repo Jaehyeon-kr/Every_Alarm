@@ -436,7 +436,7 @@ open PS_AR.xcodeproj
    - 알람 시간은 수업 시작 시간 기준으로 자동 설정됨
 
 <div align="center">
-  <img src="imgs/app_step3.png" alt="3단계: 알람 설정" width="250">
+  <img src="imgs/app_step3_.png" alt="3단계: 알람 설정" width="250">
 </div>
 
 4. **게임 선택 (선택사항)**
