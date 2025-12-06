@@ -804,6 +804,11 @@ graph LR
 이 프로젝트는 AGPL v3 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ---
+## 참고
+- Ultralytics YOLOv11 Documentation
+- Apple CoreML Documentation
+- Python Pillow (PIL) Documentation
+- SwiftUI Documentation
 
 ## 👨‍💻 개발자
 
