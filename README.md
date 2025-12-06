@@ -21,10 +21,13 @@
 - [프로젝트 소개](#-프로젝트-소개)
 - [주요 기능](#-주요-기능)
 - [기술 스택](#-기술-스택)
+- [시스템 아키텍처](#-시스템-아키텍처)
 - [설치 및 실행](#-설치-및-실행)
 - [사용 방법](#-사용-방법)
 - [프로젝트 구조](#-프로젝트-구조)
 - [데모 영상](#-데모-영상)
+- [게임화 알람 시스템 상세](#-게임화-알람-시스템-상세)
+- [핵심 기술 상세](#-핵심-기술-상세)
 - [한계점 및 향후 계획](#-한계점-및-향후-계획)
 - [기여](#-기여)
 - [라이선스](#-라이선스)
@@ -89,6 +92,154 @@
 ### 데이터
 - **YOLO 포맷** 라벨링
 - **합성 데이터 생성** (PIL 기반)
+
+---
+
+## 🏗️ 시스템 아키텍처
+
+### 전체 시스템 구조
+
+```mermaid
+flowchart TB
+    subgraph "1️⃣ 데이터 생성 (Python)"
+        A[PIL 라이브러리] -->|시간표 이미지 생성| B[합성 데이터셋]
+        B -->|화이트/다크 모드| C[YOLO 포맷 라벨링]
+    end
+
+    subgraph "2️⃣ 모델 학습 (Python)"
+        C --> D[YOLOv11n 학습]
+        D -->|PyTorch| E[best.pt 모델]
+    end
+
+    subgraph "3️⃣ 모델 변환"
+        E -->|CoreML Tools| F[best1.mlpackage]
+    end
+
+    subgraph "4️⃣ iOS 앱 (Swift/SwiftUI)"
+        F --> G[CoreML 추론 엔진]
+        H[에브리타임 스크린샷] --> G
+        G -->|객체 감지| I[시간표 파싱]
+        I -->|요일별 수업시간| J[알람 생성]
+        J --> K[알람 발동]
+        K --> L{게임 선택}
+        L -->|TapGame| M1[빠르게 버튼 누르기]
+        L -->|CarDodge| M2[자동차 피하기]
+        L -->|ColorMatch| M3[색 구분 게임]
+        L -->|MathGame| M4[산수 게임]
+        L -->|StairGame| M5[계단 오르기]
+        M1 & M2 & M3 & M4 & M5 -->|게임 완료| N[알람 종료]
+    end
+
+    style A fill:#e1f5ff
+    style D fill:#ffe1e1
+    style F fill:#e1ffe1
+    style G fill:#fff9e1
+    style L fill:#f0e1ff
+```
+
+### 데이터 파이프라인
+
+```mermaid
+flowchart LR
+    A[PIL 이미지 생성] --> B[랜덤 수업 배치]
+    B --> C[화이트/다크 모드]
+    C --> D[YOLO 좌표 계산]
+    D --> E[images/ + labels/]
+    E --> F[YOLOv11 학습]
+    F --> G[모델 평가]
+    G -->|mAP > 0.95| H[모델 선택]
+    G -->|mAP < 0.95| B
+
+    style A fill:#e3f2fd
+    style F fill:#ffebee
+    style H fill:#e8f5e9
+```
+
+### iOS 앱 워크플로우
+
+```mermaid
+flowchart TD
+    Start([앱 실행]) --> A[홈 화면]
+    A --> B{이미지 선택}
+    B -->|갤러리| C[시간표 스크린샷]
+    C --> D[AI Auto Scheduling]
+    D --> E[CoreML 모델 추론]
+    E --> F{객체 감지 성공?}
+    F -->|Yes| G[시간표 파싱]
+    F -->|No| H[에러 메시지]
+    H --> A
+    G --> I[요일별 시간 추출]
+    I --> J[알람 목록 생성]
+    J --> K{알람 활성화}
+    K -->|사용자 설정| L[알람 등록]
+    L --> M[설정 시간 대기]
+    M --> N[알람 발동 🔔]
+    N --> O[게임 화면 표시]
+    O --> P{게임 완료?}
+    P -->|완료| Q[알람 종료]
+    P -->|진행중| O
+    Q --> End([대기 상태])
+
+    style D fill:#bbdefb
+    style E fill:#c8e6c9
+    style N fill:#ffccbc
+    style O fill:#f8bbd0
+    style Q fill:#dcedc8
+```
+
+### CoreML 추론 프로세스
+
+```mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant UI as SwiftUI View
+    participant VM as ViewModel
+    participant ML as CoreML Model
+    participant P as Parser
+    participant A as AlarmManager
+
+    U->>UI: 이미지 선택
+    UI->>VM: processImage()
+    VM->>ML: predict(image)
+    ML-->>VM: Detection Results
+    VM->>P: parseSchedule(detections)
+    P->>P: 요일 가로줄 추출 (cls=1)
+    P->>P: 강의 블록 추출 (cls=0)
+    P->>P: X좌표 → 요일 매핑
+    P->>P: Y좌표 → 시간 계산
+    P-->>VM: 요일별 시간표
+    VM->>A: createAlarms(schedule)
+    A-->>UI: 알람 설정 완료
+    UI-->>U: 결과 표시
+```
+
+### 게임 시스템 플로우
+
+```mermaid
+stateDiagram-v2
+    [*] --> Waiting: 앱 실행
+    Waiting --> AlarmRinging: 설정 시간 도달
+    AlarmRinging --> GameSelection: 게임 선택 확인
+
+    GameSelection --> TapGame: 빠르게 버튼 누르기
+    GameSelection --> CarDodge: 자동차 피하기
+    GameSelection --> ColorMatch: 색 구분
+    GameSelection --> MathGame: 산수 게임
+    GameSelection --> StairGame: 계단 오르기
+
+    TapGame --> GamePlaying: 5초 타이머 시작
+    CarDodge --> GamePlaying: 장애물 생성
+    ColorMatch --> GamePlaying: 색상 문제 출제
+    MathGame --> GamePlaying: 수식 문제 출제
+    StairGame --> GamePlaying: 방향 순서 생성
+
+    GamePlaying --> GameFailed: 실패
+    GamePlaying --> GameSuccess: 목표 달성
+
+    GameFailed --> GamePlaying: 재시도
+    GameSuccess --> AlarmOff: 알람 끄기 버튼
+    AlarmOff --> [*]: 알람 종료
+```
 
 ---
 
