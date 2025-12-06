@@ -49,7 +49,7 @@
 
 이때 이미지의 저장경로는 ./datasets에 저장됩니다.
 
-![result_img](aug_sample.jpg)
+![result_img](aug_sample.png)
 
 ###
 **Step 2. Train Yolo.**
