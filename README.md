@@ -52,11 +52,21 @@
 
 ## ✨ 주요 기능
 
+### AI 시간표 분석
 - ✅ **시간표 이미지 자동 인식**: 에브리타임 시간표 스크린샷에서 수업 시간 추출
 - ✅ **합성 데이터 생성**: 다양한 시간표 패턴의 학습 데이터 자동 생성
 - ✅ **YOLOv11 학습**: 커스텀 시간표 데이터셋으로 모델 학습
 - ✅ **다크모드 대응**: 화이트/다크 테마 모두 인식
 - ✅ **iOS 앱 연동**: CoreML 모델로 변환하여 iOS 앱에 통합
+
+### 게임화 알람 시스템
+- 🎮 **5가지 미니게임**: 알람을 끄려면 게임을 완료해야 하는 강제 깨우기 시스템
+  - **빠르게 버튼 누르기**: 5초 내에 15번 클릭
+  - **자동차 피하기**: 떨어지는 장애물 7번 연속 회피
+  - **색 구분 게임**: 색상 이름과 색상 일치 여부 판단 (5문제)
+  - **산수 게임**: 간단한 덧셈/뺄셈/곱셈 문제 풀이 (5문제)
+  - **계단 오르기**: 좌우 방향 순서대로 10계단 완주
+- 🎯 **게임 선택**: 알람마다 원하는 게임 선택 가능
 
 ---
 
@@ -71,9 +81,10 @@
 - **NumPy**
 
 ### iOS
-- **Swift**
+- **Swift 5+**
+- **SwiftUI**
 - **CoreML**
-- **UIKit/SwiftUI**
+- **Xcode 14+**
 
 ### 데이터
 - **YOLO 포맷** 라벨링
@@ -196,6 +207,90 @@ python scripts/extract_model_for_Swift.py
 **출력 결과:**
 - `best1.mlpackage` - iOS에서 사용 가능한 CoreML 모델
 
+### Step 5: iOS 앱 실행
+
+iOS 앱을 실행하여 시간표 분석 및 알람 설정 기능을 사용합니다.
+
+#### 사전 요구사항
+- **Xcode 14 이상**
+- **iOS 15.0 이상** (시뮬레이터 또는 실제 기기)
+- **CoreML 모델 파일** (`best1.mlpackage` 등)
+
+#### 실행 방법
+
+1. **Xcode에서 프로젝트 열기**
+```bash
+cd PS_AR
+open PS_AR.xcodeproj
+```
+
+2. **CoreML 모델 추가 확인**
+   - 프로젝트 네비게이터에서 `best1.mlpackage` 파일이 포함되어 있는지 확인
+   - 없다면 Step 4에서 생성한 모델 파일을 드래그 앤 드롭으로 추가
+
+3. **시뮬레이터 또는 기기 선택**
+   - Xcode 상단에서 타겟 디바이스 선택 (예: iPhone 15 Pro)
+
+4. **빌드 및 실행**
+   - `Cmd + R` 또는 상단의 ▶️ 버튼 클릭
+
+#### 앱 사용 방법
+
+1. **시간표 이미지 선택**
+   - 앱 실행 후 "Choose Image" 버튼을 눌러 갤러리에서 에브리타임 시간표 스크린샷 선택
+
+<div align="center">
+  <img src="imgs/app_step1.png" alt="1단계: 이미지 선택" width="250">
+</div>
+
+2. **AI 자동 분석**
+   - "AI Auto Scheduling" 버튼 클릭
+   - CoreML 모델이 시간표를 자동으로 분석하여 요일별 수업 시작 시간 추출
+
+<div align="center">
+  <img src="imgs/app_step2.png" alt="2단계: AI 분석" width="250">
+</div>
+
+3. **알람 설정**
+   - 분석 결과를 확인하고 원하는 요일의 알람 활성화
+   - 알람 시간은 수업 시작 시간 기준으로 자동 설정됨
+
+<div align="center">
+  <img src="imgs/app_step3.png" alt="3단계: 알람 설정" width="250">
+</div>
+
+4. **게임 선택 (선택사항)**
+   - 설정 화면에서 알람용 게임 선택
+   - 알람이 울리면 선택한 게임을 완료해야 알람이 꺼짐
+
+<div align="center">
+  <img src="imgs/app_step4.png" alt="4단계: 게임 선택" width="250">
+</div>
+
+#### iOS 앱 주요 파일
+```
+PS_AR/
+├── PS_AR.xcodeproj              # Xcode 프로젝트 파일
+└── PS_AR/
+    ├── ContentView.swift        # 메인 UI
+    ├── HomeView.swift           # 홈 화면 (시간표 분석)
+    ├── AlarmListView.swift      # 알람 목록
+    ├── GameSelectView.swift     # 게임 선택 화면
+    │
+    ├── 미니게임/
+    │   ├── TapGameView.swift         # 빠르게 버튼 누르기
+    │   ├── CarDodgeGameView.swift    # 자동차 피하기
+    │   ├── ColorMatchGameView.swift  # 색 구분 게임
+    │   ├── MathGameView.swift        # 산수 게임
+    │   └── StairGameView.swift       # 계단 오르기
+    │
+    ├── Models/
+    │   ├── best1.mlpackage      # CoreML 모델
+    │   └── best1_2.mlpackage    # 추가 모델 (옵션)
+    │
+    └── Assets.xcassets          # 앱 아이콘 및 게임 이미지
+```
+
 ---
 
 ## 📁 프로젝트 구조
@@ -224,11 +319,18 @@ Every_Alarm/
 │   ├── best2.pt
 │   └── best3.pt
 │
-└── runs/                          # 학습 결과 로그
-    └── detect/
-        ├── train/
-        ├── train2/
-        └── ...
+├── runs/                          # 학습 결과 로그
+│   └── detect/
+│       ├── train/
+│       ├── train2/
+│       └── ...
+│
+└── PS_AR/                         # iOS 앱 프로젝트
+    ├── PS_AR.xcodeproj            # Xcode 프로젝트
+    └── PS_AR/
+        ├── ContentView.swift      # 메인 UI
+        ├── best1.mlpackage        # CoreML 모델
+        └── Assets.xcassets        # 앱 리소스
 ```
 
 ---
@@ -236,6 +338,134 @@ Every_Alarm/
 ## 🎬 데모 영상
 
 > 🎥 데모 영상을 추가 예정입니다.
+
+---
+
+## 🎮 게임화 알람 시스템 상세
+
+### 게임 메커니즘
+
+Every Alarm은 단순히 알람을 끄는 것이 아니라, **게임을 완료해야만 알람을 끌 수 있는** 강제 깨우기 시스템을 제공합니다. 이는 사용자가 확실히 깨어나도록 도와줍니다.
+
+### 미니게임 목록
+
+| 게임 | 난이도 | 목표 | 설명 |
+|------|--------|------|------|
+| 🖱️ **빠르게 버튼 누르기** | ⭐ 쉬움 | 5초 내 15번 클릭 | 반복 클릭으로 뇌를 깨우기 |
+| 🚗 **자동차 피하기** | ⭐⭐ 보통 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
+| 🎨 **색 구분 게임** | ⭐⭐ 보통 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
+| ➕ **산수 게임** | ⭐⭐ 보통 | 5문제 정답 | 간단한 사칙연산 문제 풀이 |
+| 🪜 **계단 오르기** | ⭐⭐⭐ 어려움 | 10계단 완주 | 좌우 순서 기억력 테스트 |
+
+<div align="center">
+  <img src="imgs/games_overview.png" alt="미니게임 모음" width="800">
+  <p><i>5가지 미니게임 화면 예시</i></p>
+</div>
+
+### 게임 상세 설명
+
+#### 1. 빠르게 버튼 누르기 (TapGameView)
+
+<div align="center">
+  <img src="imgs/tap_game.png" alt="빠르게 버튼 누르기" width="300">
+</div>
+
+```swift
+// 5초 타이머와 클릭 카운터
+@State private var count = 0
+@State private var timeLeft: Double = 5.0
+
+// 15번 이상 클릭 시 성공
+if count >= 15 { gameFinished = true }
+```
+- **목표**: 제한 시간 내에 빠르게 클릭하여 반응 속도 향상
+- **난이도**: 가장 쉬움 (단순 반복 작업)
+
+#### 2. 자동차 피하기 (CarDodgeGameView)
+
+<div align="center">
+  <img src="imgs/car_game.png" alt="자동차 피하기 게임" width="300">
+</div>
+
+```swift
+// 충돌 감지 로직
+let dx = abs(obs.x - carX)
+let dy = abs(obs.y - carY)
+if dx < 45 && dy < 90 {
+    avoidCount = 0  // 실패 시 초기화
+}
+```
+- **목표**: 떨어지는 장애물을 좌우 이동으로 피하기
+- **난이도**: 보통 (집중력 필요)
+- **특징**: 충돌 시 카운트 초기화로 긴장감 유지
+
+#### 3. 색 구분 게임 (ColorMatchGameView)
+
+<div align="center">
+  <img src="imgs/color_game.png" alt="색 구분 게임" width="300">
+</div>
+
+```swift
+// 색상 이름과 실제 색상이 다를 수 있음
+currentText = "RED"
+currentColor = .blue  // 불일치!
+```
+- **목표**: 스트룹 효과(Stroop Effect)를 활용한 인지 게임
+- **난이도**: 보통 (순간적인 판단력 필요)
+- **예시**: "RED"라는 텍스트가 파란색으로 표시 → 불일치 선택
+
+#### 4. 산수 게임 (MathGameView)
+
+<div align="center">
+  <img src="imgs/math_game.png" alt="산수 게임" width="300">
+</div>
+
+```swift
+// 랜덤 문제 생성
+let a = Int.random(in: 1...20)
+let b = Int.random(in: 1...20)
+let op = ["+", "-", "×"].randomElement()!
+```
+- **목표**: 간단한 산술 연산으로 뇌 활성화
+- **난이도**: 보통 (계산 능력 필요)
+- **특징**: 4개 선택지 중 정답 고르기
+
+#### 5. 계단 오르기 (StairGameView)
+
+<div align="center">
+  <img src="imgs/stair_game.png" alt="계단 오르기 게임" width="300">
+</div>
+
+```swift
+// 방향 순서 기억
+let steps = [true, false, true, true, ...]  // 10개
+if steps[currentIndex] == direction {
+    currentIndex += 1  // 성공
+} else {
+    currentIndex = 0   // 처음부터
+}
+```
+- **목표**: 좌우 방향 순서를 기억하며 10계단 완주
+- **난이도**: 어려움 (메모리 + 집중력)
+- **특징**: 한 번이라도 틀리면 처음부터 시작
+
+### 게임 선택 시스템
+
+```swift
+@AppStorage("selectedGame") var selectedGame: String = "TapGame"
+
+// GameSelectView에서 게임 선택
+// HomeView에서 알람 발동 시 선택된 게임 표시
+.sheet(isPresented: $alarmIsRinging) {
+    selectedGameView {
+        alarmIsRinging = false
+        AlarmAudioManager.shared.stopAlarmSound()
+    }
+}
+```
+
+- **UserDefaults 저장**: 선택한 게임이 앱 재시작 후에도 유지됨
+- **동적 로딩**: 알람마다 다른 게임 선택 가능
 
 ---
 
