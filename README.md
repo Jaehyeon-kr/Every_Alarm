@@ -59,7 +59,8 @@
 
 위와 같이 argment를 parsing하여 전달하면 원하는 weight와 원하는 img를 inference 해볼 수 있습니다. 이를 통해 yolo train이 원활하게 이루어졌는지 확인할 수 있습니다. 
 
-![result_img](ddd.jpg)
+![result_img](white_result_visualized.jpg)
+
 ###
 **Step 4. Extract_Model**
 - python extract_model_for_Swift.py 
@@ -75,6 +76,7 @@
 
 ### System Front Diagram
 
+![pigma](pigma_diagram.png)
 
 
 
