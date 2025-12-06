@@ -1,4 +1,4 @@
-# Personalize Alarm
+# Every Alarm : Don't Late!
 
 <div align="center">
 
@@ -33,7 +33,7 @@
 
 ## 🎯 프로젝트 소개
 
-**Personalize Alarm**은 대학생들이 필수적으로 사용하는 **에브리타임(Everytime)** 앱의 시간표 스크린샷을 자동으로 분석하여, 수업 시작 시간에 맞춰 알람을 설정해주는 iOS 애플리케이션입니다.
+**Every Alarm**은 대학생들이 필수적으로 사용하는 **에브리타임(Everytime)** 앱의 시간표 스크린샷을 자동으로 분석하여, 수업 시작 시간에 맞춰 알람을 설정해주는 iOS 애플리케이션입니다.
 
 ### 🔍 핵심 아이디어
 
@@ -93,7 +93,7 @@ pip 패키지 관리자
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/yourusername/Personalize_Alarm.git
+git clone https://github.com/Jaehyeon-kr/Every_Alarm.git
 cd Personalize_Alarm
 ```
 
@@ -200,7 +200,7 @@ python scripts/extract_model_for_Swift.py
 ## 📁 프로젝트 구조
 
 ```
-Personalize_Alarm/
+Every_Alarm/
 ├── README.md                      # 프로젝트 문서
 ├── dataset.yaml                   # YOLO 데이터셋 설정
 ├── schedule_img_aug.py            # 합성 시간표 이미지 생성
