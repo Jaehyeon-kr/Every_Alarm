@@ -312,7 +312,7 @@ def extract_time_schedule(detections, W, H):
 
 ## 👨‍💻 개발자
 
-- **GitHub**: [@Jaehyeon-kr]([https://github.com/Jahyeon-k](https://github.com/Jaehyeon-kr))
+- **GitHub**: [@Jaehyeon-kr](https://github.com/Jahyeon-k](https://github.com/Jaehyeon-kr)
 - **Email**: qmdlghfl2@gmail.com
 
 ---
