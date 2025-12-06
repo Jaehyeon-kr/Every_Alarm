@@ -1,4 +1,4 @@
-# Every Alarm : Don't Late!
+# Every Alarm : Don't Late! 교수님 늦지 않겠습니다.
 
 <div align="center">
 
