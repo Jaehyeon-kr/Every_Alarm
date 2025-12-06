@@ -138,6 +138,12 @@ flowchart TB
     style L fill:#f0e1ff
 ```
 
+**설명:**
+1. **Python 단계**: PIL로 합성 시간표 이미지를 생성하고 YOLO 포맷으로 라벨링
+2. **모델 학습**: YOLOv11n을 PyTorch로 학습하여 `.pt` 가중치 생성
+3. **iOS 배포**: CoreML Tools로 변환하여 iOS에서 실행 가능한 `.mlpackage` 생성
+4. **앱 실행**: 사용자가 업로드한 시간표를 CoreML로 분석 → 알람 생성 → 게임 완료 후 알람 종료
+
 ### 데이터 파이프라인
 
 ```mermaid
@@ -155,6 +161,11 @@ flowchart LR
     style F fill:#ffebee
     style H fill:#e8f5e9
 ```
+
+**설명:**
+- **순환 학습 구조**: 모델 평가 결과(mAP)가 0.95 이하면 데이터를 재생성하여 성능 향상
+- **자동 라벨링**: PIL로 이미지 생성 시 YOLO 좌표를 자동 계산하여 수작업 라벨링 불필요
+- **화이트/다크 모드**: 양쪽 테마에서 모두 작동하도록 학습 데이터 다양화
 
 ### iOS 앱 워크플로우
 
@@ -188,6 +199,13 @@ flowchart TD
     style Q fill:#dcedc8
 ```
 
+**설명:**
+- **이미지 선택**: 사용자가 에브리타임 시간표 스크린샷을 갤러리에서 선택
+- **AI 분석**: CoreML 모델이 객체 감지를 수행하여 수업 시간대 추출
+- **알람 등록**: 요일별 첫 수업 시간을 기준으로 알람 자동 생성
+- **게임 루프**: 알람이 울리면 선택한 게임을 완료해야만 알람 종료 가능
+- **에러 처리**: 객체 감지 실패 시 에러 메시지 표시 후 홈 화면으로 복귀
+
 ### CoreML 추론 프로세스
 
 ```mermaid
@@ -214,6 +232,15 @@ sequenceDiagram
     UI-->>U: 결과 표시
 ```
 
+**설명:**
+- **시퀀스 다이어그램**: SwiftUI View → ViewModel → CoreML → Parser → AlarmManager 간의 데이터 흐름
+- **파싱 알고리즘**:
+  1. 요일 가로줄(cls=1) 감지로 기준선 설정
+  2. 강의 블록(cls=0) 감지 및 위치 분석
+  3. X좌표로 요일 판별 (월~금 5개 열)
+  4. Y좌표로 시간 계산 (9시~18시)
+- **알람 생성**: 요일별 가장 빠른 수업 시간을 추출하여 AlarmManager에 전달
+
 ### 게임 시스템 플로우
 
 ```mermaid
@@ -239,6 +266,12 @@ stateDiagram-v2
     GameSuccess --> AlarmOff: 알람 끄기 버튼
     AlarmOff --> [*]: 알람 종료
 ```
+
+**설명:**
+- **상태 기반 설계**: 알람 대기 → 울림 → 게임 선택 → 플레이 → 성공/실패 → 종료
+- **4가지 게임 분기**: UserDefaults에 저장된 선택 게임에 따라 다른 게임 화면 표시
+- **재시도 메커니즘**: 게임 실패 시 자동으로 재시작 (알람은 계속 울림)
+- **강제 깨우기**: 게임 목표를 달성해야만 "알람 끄기" 버튼이 활성화되어 확실한 기상 유도
 
 ---
 
@@ -718,6 +751,12 @@ graph LR
     E[AlarmStore] --> F[UserNotifications]
     F --> G[iOS System]
 ```
+
+**설명:**
+- **Repository 패턴**: SwiftUI View는 Repository를 통해서만 데이터베이스에 접근 (관심사 분리)
+- **GRDB ORM**: SQLite와 Swift 간의 타입 안전한 매핑 제공
+- **양방향 데이터 흐름**: CRUD 작업 후 최신 데이터를 다시 View로 전달
+- **알람 시스템 분리**: AlarmStore는 DB가 아닌 메모리 기반, UserNotifications API로 iOS 시스템 알람 등록
 
 ---
 
