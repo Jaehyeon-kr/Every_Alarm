@@ -121,7 +121,7 @@ FONT_TIME = ImageFont.truetype("/path/to/your/font.ttf", 40)
 합성 시간표 이미지를 생성합니다. 인자로 생성할 이미지 개수를 지정합니다.
 
 ```bash
-python schedule_img_aug.py 10000
+python scripts/schedule_img_aug.py 10000
 ```
 
 **출력 결과:**
@@ -143,7 +143,7 @@ python schedule_img_aug.py 10000
 생성된 데이터로 YOLOv11n 모델을 학습합니다.
 
 ```bash
-python yolo_train.py
+python scripts/yolo_train.py
 ```
 
 **학습 파라미터:**
@@ -163,7 +163,7 @@ python yolo_train.py
 학습된 모델로 시간표 이미지를 추론합니다.
 
 ```bash
-python true_inference.py --weights ./checkpoints/best.pt --img_path white_test.jpg
+python scripts/true_inference.py --weights ./checkpoints/best.pt --img_path white_test.jpg
 ```
 
 **출력 결과:**
@@ -186,7 +186,7 @@ iOS 앱에서 사용하기 위해 PyTorch 모델을 CoreML 포맷으로 변환�
 
 ```bash
 # Mac 환경
-python extract_model_for_Swift.py
+python scripts/extract_model_for_Swift.py
 
 # Windows 환경 - Google Colab 사용
 # Colab에 코드 업로드 후 실행
