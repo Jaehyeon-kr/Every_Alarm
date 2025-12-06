@@ -28,6 +28,7 @@
 - [데모 영상](#-데모-영상)
 - [게임화 알람 시스템 상세](#-게임화-알람-시스템-상세)
 - [핵심 기술 상세](#-핵심-기술-상세)
+- [데이터베이스 구조](#-데이터베이스-구조)
 - [한계점 및 향후 계획](#-한계점-및-향후-계획)
 - [기여](#-기여)
 - [라이선스](#-라이선스)
@@ -63,12 +64,11 @@
 - ✅ **iOS 앱 연동**: CoreML 모델로 변환하여 iOS 앱에 통합
 
 ### 게임화 알람 시스템
-- 🎮 **5가지 미니게임**: 알람을 끄려면 게임을 완료해야 하는 강제 깨우기 시스템
+- 🎮 **4가지 미니게임**: 알람을 끄려면 게임을 완료해야 하는 강제 깨우기 시스템
   - **빠르게 버튼 누르기**: 5초 내에 15번 클릭
   - **자동차 피하기**: 떨어지는 장애물 7번 연속 회피
   - **색 구분 게임**: 색상 이름과 색상 일치 여부 판단 (5문제)
   - **산수 게임**: 간단한 덧셈/뺄셈/곱셈 문제 풀이 (5문제)
-  - **계단 오르기**: 좌우 방향 순서대로 10계단 완주
 - 🎯 **게임 선택**: 알람마다 원하는 게임 선택 가능
 
 ---
@@ -88,6 +88,8 @@
 - **SwiftUI**
 - **CoreML**
 - **Xcode 14+**
+- **GRDB.swift** (SQLite ORM)
+- **UserNotifications** (알람 시스템)
 
 ### 데이터
 - **YOLO 포맷** 라벨링
@@ -126,8 +128,7 @@ flowchart TB
         L -->|CarDodge| M2[자동차 피하기]
         L -->|ColorMatch| M3[색 구분 게임]
         L -->|MathGame| M4[산수 게임]
-        L -->|StairGame| M5[계단 오르기]
-        M1 & M2 & M3 & M4 & M5 -->|게임 완료| N[알람 종료]
+        M1 & M2 & M3 & M4 -->|게임 완료| N[알람 종료]
     end
 
     style A fill:#e1f5ff
@@ -225,13 +226,11 @@ stateDiagram-v2
     GameSelection --> CarDodge: 자동차 피하기
     GameSelection --> ColorMatch: 색 구분
     GameSelection --> MathGame: 산수 게임
-    GameSelection --> StairGame: 계단 오르기
 
     TapGame --> GamePlaying: 5초 타이머 시작
     CarDodge --> GamePlaying: 장애물 생성
     ColorMatch --> GamePlaying: 색상 문제 출제
     MathGame --> GamePlaying: 수식 문제 출제
-    StairGame --> GamePlaying: 방향 순서 생성
 
     GamePlaying --> GameFailed: 실패
     GamePlaying --> GameSuccess: 목표 달성
@@ -432,8 +431,7 @@ PS_AR/
     │   ├── TapGameView.swift         # 빠르게 버튼 누르기
     │   ├── CarDodgeGameView.swift    # 자동차 피하기
     │   ├── ColorMatchGameView.swift  # 색 구분 게임
-    │   ├── MathGameView.swift        # 산수 게임
-    │   └── StairGameView.swift       # 계단 오르기
+    │   └── MathGameView.swift        # 산수 게임
     │
     ├── Models/
     │   ├── best1.mlpackage      # CoreML 모델
@@ -506,11 +504,10 @@ Every Alarm은 단순히 알람을 끄는 것이 아니라, **게임을 완료�
 | 🚗 **자동차 피하기** | ⭐⭐ 보통 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
 | 🎨 **색 구분 게임** | ⭐⭐ 보통 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
 | ➕ **산수 게임** | ⭐⭐ 보통 | 5문제 정답 | 간단한 사칙연산 문제 풀이 |
-| 🪜 **계단 오르기** | ⭐⭐⭐ 어려움 | 10계단 완주 | 좌우 순서 기억력 테스트 |
 
 <div align="center">
   <img src="imgs/games_overview.png" alt="미니게임 모음" width="800">
-  <p><i>5가지 미니게임 화면 예시</i></p>
+  <p><i>4가지 미니게임 화면 예시</i></p>
 </div>
 
 ### 게임 상세 설명
@@ -581,25 +578,6 @@ let op = ["+", "-", "×"].randomElement()!
 - **난이도**: 보통 (계산 능력 필요)
 - **특징**: 4개 선택지 중 정답 고르기
 
-#### 5. 계단 오르기 (StairGameView)
-
-<div align="center">
-  <img src="imgs/stair_game.png" alt="계단 오르기 게임" width="300">
-</div>
-
-```swift
-// 방향 순서 기억
-let steps = [true, false, true, true, ...]  // 10개
-if steps[currentIndex] == direction {
-    currentIndex += 1  // 성공
-} else {
-    currentIndex = 0   // 처음부터
-}
-```
-- **목표**: 좌우 방향 순서를 기억하며 10계단 완주
-- **난이도**: 어려움 (메모리 + 집중력)
-- **특징**: 한 번이라도 틀리면 처음부터 시작
-
 ### 게임 선택 시스템
 
 ```swift
@@ -660,6 +638,89 @@ def extract_time_schedule(detections, W, H):
 
 ---
 
+## 💾 데이터베이스 구조
+
+### 사용 기술
+
+- **SQLite**: iOS 기본 내장 데이터베이스
+- **GRDB.swift**: Swift용 타입 안전 SQLite ORM
+- **UserDefaults**: 앱 설정 저장
+- **UserNotifications**: 시스템 알람 관리
+
+### 데이터 모델
+
+#### 1. Timetable (시간표)
+```swift
+struct Timetable {
+    var id: Int64?
+    var title: String        // 수업명
+    var day: String          // 요일
+    var startTime: String    // 시작 시간
+    var endTime: String      // 종료 시간
+    var defaultAlarm: String // AI 추출 알람
+    var userAlarm: String?   // 사용자 설정 알람
+}
+```
+
+#### 2. DaySchedule (요일별 일정)
+```swift
+struct DaySchedule {
+    var id: Int64?
+    var day: String          // 요일
+    var classTime: String    // 수업 시간
+    var defaultAlarm: String // 기본 알람
+    var userAlarm: String?   // 커스텀 알람
+}
+```
+
+#### 3. Todo (할 일)
+```swift
+struct Todo {
+    var id: Int64?
+    var title: String        // 할 일 제목
+    var isDone: Bool         // 완료 여부
+    var createdAt: Date      // 생성 날짜
+}
+```
+
+### Repository 패턴
+
+각 데이터 모델마다 전용 Repository 클래스를 통해 CRUD 작업을 수행합니다:
+
+- **TimetableRepository**: 시간표 저장/조회/수정/삭제
+- **DayScheduleRepository**: 일별 일정 관리
+- **TodoRepository**: 할 일 목록 관리
+- **AlarmStore**: 알람 메모리 관리 (Singleton 패턴)
+
+### 데이터 저장 위치
+
+```
+~/Documents/
+├── schedule.sqlite    # 시간표 및 일정 데이터
+└── todos.sqlite       # 할 일 목록 데이터
+
+UserDefaults
+├── selectedGame       # 선택된 게임
+└── appColorScheme     # 앱 테마 설정
+```
+
+### 데이터 흐름
+
+```mermaid
+graph LR
+    A[SwiftUI View] --> B[Repository]
+    B --> C[GRDB]
+    C --> D[SQLite DB]
+    D --> C
+    C --> B
+    B --> A
+
+    E[AlarmStore] --> F[UserNotifications]
+    F --> G[iOS System]
+```
+
+---
+
 ## ⚠️ 한계점 및 향후 계획
 
 ### 현재 한계점
@@ -676,6 +737,7 @@ def extract_time_schedule(detections, W, H):
 - ✅ **Android 버전** 개발
 - ✅ **OCR 통합**: 강의명, 강의실 정보 추출
 - ✅ **수업별 맞춤 알람**: 수업 전 10분, 30분 등 설정 가능
+- ✅ **클라우드 동기화**: 여러 기기 간 데이터 동기화
 
 ---
 
