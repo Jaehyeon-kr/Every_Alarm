@@ -258,8 +258,8 @@ def extract_time_schedule(detections, W, H):
     # 1. 요일 가로줄 감지 (cls=1)
     # 2. 강의 블록 감지 (cls=0)
     # 3. X 좌표 → 요일 매핑
-    # 4. Y 좌표 → 시간 계산
-    # 5. 요일별 첫 수업 추출
+    # 4. Y 좌표 → 시간 계산 
+    # 5. 요일별 첫 수업 추출 (첫 수업과 요일 맨 윗줄간의 간격)
 ```
 
 **동작 과정:**
@@ -305,14 +305,14 @@ def extract_time_schedule(detections, W, H):
 
 ## 📄 라이선스
 
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 AGPL v3 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
 ---
 
 ## 👨‍💻 개발자
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Email**: your.email@example.com
+- **GitHub**: [@Jaehyeon-kr](https://github.com/Jahyeon-kr)
+- **Email**: qmdlghfl2@gmail.com
 
 ---
 
