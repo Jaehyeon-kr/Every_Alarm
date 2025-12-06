@@ -48,6 +48,9 @@
 데이터는 많을 수록 성능이 좋아질 수 있으나, 컴퓨터나 노트북의 저장공간을 생각합시다.
 
 이때 이미지의 저장경로는 ./datasets에 저장됩니다.
+
+![result_img](aug_sample.jpg)
+
 ###
 **Step 2. Train Yolo.**
 - python yolo_train.py 
