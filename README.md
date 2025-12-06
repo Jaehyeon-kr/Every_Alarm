@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Everytime Schedule Detection](white_test.jpg)
+![Everytime Schedule Detection](main.png)
 
 **에브리타임 시간표를 자동으로 인식하여 알람을 설정하는 iOS 앱**
 
