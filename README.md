@@ -409,6 +409,13 @@ open PS_AR.xcodeproj
 
 #### 앱 사용 방법
 
+전체 과정 
+
+<div align="center">
+  <img src="imgs/app_tech_overview.png" alt="1단계: 이미지 선택" width="250">
+</div>
+
+
 1. **시간표 이미지 선택**
    - 앱 실행 후 "Choose Image" 버튼을 눌러 갤러리에서 에브리타임 시간표 스크린샷 선택
 
