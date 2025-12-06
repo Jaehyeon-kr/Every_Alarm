@@ -131,11 +131,11 @@ flowchart TB
         M1 & M2 & M3 & M4 -->|게임 완료| N[알람 종료]
     end
 
-    style A fill:#e1f5ff
-    style D fill:#ffe1e1
-    style F fill:#e1ffe1
-    style G fill:#fff9e1
-    style L fill:#f0e1ff
+    style A fill:#e1f5ff,stroke:#0288d1,stroke-width:2px,color:#000
+    style D fill:#ffe1e1,stroke:#d32f2f,stroke-width:2px,color:#000
+    style F fill:#e1ffe1,stroke:#388e3c,stroke-width:2px,color:#000
+    style G fill:#fff9e1,stroke:#f57c00,stroke-width:2px,color:#000
+    style L fill:#f0e1ff,stroke:#7b1fa2,stroke-width:2px,color:#000
 ```
 
 **설명:**
@@ -157,9 +157,9 @@ flowchart LR
     G -->|mAP > 0.95| H[모델 선택]
     G -->|mAP < 0.95| B
 
-    style A fill:#e3f2fd
-    style F fill:#ffebee
-    style H fill:#e8f5e9
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#000
+    style F fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#000
+    style H fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000
 ```
 
 **설명:**
@@ -183,10 +183,10 @@ flowchart LR
     J -->|No| I
     J -->|Yes| K[✔️ 알람 종료]
 
-    style C fill:#c8e6c9
-    style H fill:#ffccbc
-    style I fill:#f8bbd0
-    style K fill:#dcedc8
+    style C fill:#c8e6c9,stroke:#388e3c,stroke-width:2px,color:#000
+    style H fill:#ffccbc,stroke:#e64a19,stroke-width:2px,color:#000
+    style I fill:#f8bbd0,stroke:#c2185b,stroke-width:2px,color:#000
+    style K fill:#dcedc8,stroke:#689f38,stroke-width:2px,color:#000
 ```
 
 **설명:**
@@ -277,7 +277,7 @@ pip 패키지 관리자
 
 ```bash
 git clone https://github.com/Jaehyeon-kr/Every_Alarm.git
-cd PS_AR
+cd Personalize_Alarm
 ```
 
 ### 2. 필수 패키지 설치
@@ -414,10 +414,6 @@ open PS_AR.xcodeproj
   <img src="imgs/app_tech_overview.png" alt="전체 과정" width="800">
 </div>
 
-사전 학습 과정을 통해 얻은 Yolo11n_finetune 엔진을 통해 Auto Scheduled된 알람 시간을 스케쥴 업로드와 클릭 한번을 통해 얻습니다.
-홈으로 돌아모면 자동으로 알람이 설정되어있는 과정을 보여줍니다. 
-
-### 
 
 1. **시간표 이미지 선택**
    - 앱 실행 후 "Choose Image" 버튼을 눌러 갤러리에서 에브리타임 시간표 스크린샷 선택
@@ -455,7 +451,8 @@ open PS_AR.xcodeproj
 PS_AR/
 ├── PS_AR.xcodeproj              # Xcode 프로젝트 파일
 └── PS_AR/
-    ├── HomeView.swift           # 홈 화면 (메인, 시간표 분석)
+    ├── ContentView.swift        # 메인 UI
+    ├── HomeView.swift           # 홈 화면 (시간표 분석)
     ├── AlarmListView.swift      # 알람 목록
     ├── GameSelectView.swift     # 게임 선택 화면
     │
@@ -518,7 +515,18 @@ Every_Alarm/
 
 ## 🎬 데모 영상
 
-> 🎥 데모 영상을 추가 예정입니다.
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=ykvwcdwYNG8">
+    <img src="https://img.youtube.com/vi/ykvwcdwYNG8/maxresdefault.jpg" alt="Every Alarm 데모 영상" width="800">
+  </a>
+  <p><i>▶️ 클릭하여 데모 영상 시청하기</i></p>
+</div>
+
+**주요 내용:**
+- ✅ 에브리타임 시간표 이미지 업로드 및 AI 분석
+- ✅ 자동 알람 생성 및 설정
+- ✅ 4가지 미니게임 플레이 데모
+- ✅ 실제 사용 시나리오 시연
 
 ---
 
@@ -533,8 +541,8 @@ Every Alarm은 단순히 알람을 끄는 것이 아니라, **게임을 완료�
 | 게임 | 난이도 | 목표 | 설명 |
 |------|--------|------|------|
 | 🖱️ **빠르게 버튼 누르기** | ⭐ 쉬움 | 5초 내 15번 클릭 | 반복 클릭으로 뇌를 깨우기 |
-| 🚗 **자동차 피하기** | ⭐⭐⭐⭐ 매우 어려움 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
-| 🎨 **색 구분 게임** | ⭐ 쉬움 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
+| 🚗 **자동차 피하기** | ⭐⭐ 보통 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
+| 🎨 **색 구분 게임** | ⭐⭐ 보통 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
 | ➕ **산수 게임** | ⭐⭐ 보통 | 5문제 정답 | 간단한 사칙연산 문제 풀이 |
 
 <div align="center">
