@@ -1,5 +1,5 @@
 
-# Every_Alarm : 시간표로 알람 준비 끝!
+# Every_Alarm : 시간표로 한 학기 알람 준비 끝!
 ##
 ![img](white_test.jpg)
 
