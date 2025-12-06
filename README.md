@@ -9,7 +9,8 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![YOLOv11](https://img.shields.io/badge/YOLOv11-Object%20Detection-green.svg)](https://github.com/ultralytics/ultralytics)
 [![Swift](https://img.shields.io/badge/Swift-iOS-orange.svg)](https://swift.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
+
 
 </div>
 
