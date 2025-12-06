@@ -408,10 +408,10 @@ open PS_AR.xcodeproj
 
 #### 앱 사용 방법
 
-전체 과정 
+전체 과정
 
 <div align="center">
-  <img src="imgs/app_tech_overview.png" alt="1단계: 이미지 선택" width="250">
+  <img src="imgs/app_tech_overview.png" alt="전체 과정" width="500">
 </div>
 
 
@@ -419,7 +419,7 @@ open PS_AR.xcodeproj
    - 앱 실행 후 "Choose Image" 버튼을 눌러 갤러리에서 에브리타임 시간표 스크린샷 선택
 
 <div align="center">
-  <img src="imgs/app_step1.png" alt="1단계: 이미지 선택" width="250">
+  <img src="imgs/app_step1.png" alt="1단계: 이미지 선택" width="500">
 </div>
 
 2. **AI 자동 분석**
@@ -427,7 +427,7 @@ open PS_AR.xcodeproj
    - CoreML 모델이 시간표를 자동으로 분석하여 요일별 수업 시작 시간 추출
 
 <div align="center">
-  <img src="imgs/app_step2.png" alt="2단계: AI 분석" width="250">
+  <img src="imgs/app_step2.png" alt="2단계: AI 분석" width="500">
 </div>
 
 3. **알람 설정**
@@ -435,7 +435,7 @@ open PS_AR.xcodeproj
    - 알람 시간은 수업 시작 시간 기준으로 자동 설정됨
 
 <div align="center">
-  <img src="imgs/app_step3_.png" alt="3단계: 알람 설정" width="250">
+  <img src="imgs/app_step3_.png" alt="3단계: 알람 설정" width="500">
 </div>
 
 4. **게임 선택 (선택사항)**
@@ -443,7 +443,7 @@ open PS_AR.xcodeproj
    - 알람이 울리면 선택한 게임을 완료해야 알람이 꺼짐
 
 <div align="center">
-  <img src="imgs/app_step4.png" alt="4단계: 게임 선택" width="250">
+  <img src="imgs/app_step4.png" alt="4단계: 게임 선택" width="500">
 </div>
 
 #### iOS 앱 주요 파일
