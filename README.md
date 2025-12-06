@@ -277,7 +277,7 @@ pip 패키지 관리자
 
 ```bash
 git clone https://github.com/Jaehyeon-kr/Every_Alarm.git
-cd Personalize_Alarm
+cd PS_AR
 ```
 
 ### 2. 필수 패키지 설치
@@ -414,6 +414,10 @@ open PS_AR.xcodeproj
   <img src="imgs/app_tech_overview.png" alt="전체 과정" width="800">
 </div>
 
+사전 학습 과정을 통해 얻은 Yolo11n_finetune 엔진을 통해 Auto Scheduled된 알람 시간을 스케쥴 업로드와 클릭 한번을 통해 얻습니다.
+홈으로 돌아모면 자동으로 알람이 설정되어있는 과정을 보여줍니다. 
+
+### 
 
 1. **시간표 이미지 선택**
    - 앱 실행 후 "Choose Image" 버튼을 눌러 갤러리에서 에브리타임 시간표 스크린샷 선택
@@ -451,8 +455,7 @@ open PS_AR.xcodeproj
 PS_AR/
 ├── PS_AR.xcodeproj              # Xcode 프로젝트 파일
 └── PS_AR/
-    ├── ContentView.swift        # 메인 UI
-    ├── HomeView.swift           # 홈 화면 (시간표 분석)
+    ├── HomeView.swift           # 홈 화면 (메인, 시간표 분석)
     ├── AlarmListView.swift      # 알람 목록
     ├── GameSelectView.swift     # 게임 선택 화면
     │
@@ -530,8 +533,8 @@ Every Alarm은 단순히 알람을 끄는 것이 아니라, **게임을 완료�
 | 게임 | 난이도 | 목표 | 설명 |
 |------|--------|------|------|
 | 🖱️ **빠르게 버튼 누르기** | ⭐ 쉬움 | 5초 내 15번 클릭 | 반복 클릭으로 뇌를 깨우기 |
-| 🚗 **자동차 피하기** | ⭐⭐ 보통 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
-| 🎨 **색 구분 게임** | ⭐⭐ 보통 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
+| 🚗 **자동차 피하기** | ⭐⭐⭐⭐ 매우 어려움 | 7번 연속 회피 | 집중력과 반사신경 테스트 |
+| 🎨 **색 구분 게임** | ⭐ 쉬움 | 5문제 정답 | 색상 이름과 색상 일치 판단 |
 | ➕ **산수 게임** | ⭐⭐ 보통 | 5문제 정답 | 간단한 사칙연산 문제 풀이 |
 
 <div align="center">
