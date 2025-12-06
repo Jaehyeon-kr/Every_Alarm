@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Everytime Schedule Detection](./imgs/main.png)
+![Everytime Schedule Detection](./imgs/main_.png)
 
 **에브리타임 시간표를 자동으로 인식하여 알람을 설정하는 iOS 앱**
 
@@ -411,7 +411,7 @@ open PS_AR.xcodeproj
 전체 과정
 
 <div align="center">
-  <img src="imgs/app_tech_overview.png" alt="전체 과정" width="500">
+  <img src="imgs/app_tech_overview.png" alt="전체 과정" width="800">
 </div>
 
 
