@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Everytime Schedule Detection](main.png)
+![Everytime Schedule Detection](./imgs/main.png)
 
 **에브리타임 시간표를 자동으로 인식하여 알람을 설정하는 iOS 앱**
 
@@ -132,7 +132,7 @@ python schedule_img_aug.py 10000
 - `10000`: 생성할 이미지 개수 (권장: 5000~10000장)
   
 <div align="center">
-  <img src="aug_sample_.png" alt="Aug_" width="400">
+  <img src="imgs/aug_sample.png" alt="Aug_" width="400">
 </div>
 
 
@@ -178,7 +178,7 @@ python true_inference.py --weights ./checkpoints/best.pt --img_path white_test.j
 시각화 완료 → result_visualized.jpg 로 저장됨
 ```
 
-![Inference Result](ddd.jpg)
+![Inference Result](imgs/infer_result.png)
 
 ### Step 4: CoreML 모델 추출 (iOS 배포)
 
