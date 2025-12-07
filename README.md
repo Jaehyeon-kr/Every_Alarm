@@ -384,10 +384,13 @@ python scripts/extract_model_for_Swift.py
 iOS 앱을 실행하여 시간표 분석 및 알람 설정 기능을 사용합니다.
 
 #### 사전 요구사항
-- **Xcode 14 이상**
+- **Xcode 14 이상** (필수)
 - **iOS 15.0 이상** (시뮬레이터 또는 실제 기기)
 - **CoreML 모델 파일** (`best1.mlpackage` 등)
-
+- **PS_AR 폴더의 파일을 실행**시키고자 한다면, git clone 후 Xcode를 실행해서 프로젝트를 PS_AR 폴더로 열어주세요.
+- **GRDB Swift dependency package 추가** : 안하면 오류납니다. (Swift 작동시)
+- **Swift Asset Error** : AppIcon 관련 오류가 뜬다면, PS_AR 폴더안 Assets에서 AppIcon을 지우고 우클릭 New AppIcon을 만들어주세요.
+  
 #### 실행 방법
 
 1. **Xcode에서 프로젝트 열기**
@@ -402,9 +405,14 @@ open PS_AR.xcodeproj
 
 3. **시뮬레이터 또는 기기 선택**
    - Xcode 상단에서 타겟 디바이스 선택 (예: iPhone 15 Pro)
+  
+4. **GRDB, Assets 체크**
+   - 의존성 패키지, Assets 확인
 
 4. **빌드 및 실행**
    - `Cmd + R` 또는 상단의 ▶️ 버튼 클릭
+  
+
 
 #### 앱 사용 방법
 
