@@ -389,7 +389,9 @@ iOS 앱을 실행하여 시간표 분석 및 알람 설정 기능을 사용합�
 - **CoreML 모델 파일** (`best1.mlpackage` 등)
 - **PS_AR 폴더의 파일을 실행**시키고자 한다면, git clone 후 Xcode를 실행해서 프로젝트를 PS_AR 폴더로 열어주세요.
 - **GRDB Swift dependency package 추가** : 안하면 오류납니다. (Swift 작동시)
+  + Xcode 상단 -> File -> Add package dependencies -> GRDB -> GRDB PS_AR **check**, GRDB Dinamic **None**, add
 - **Swift Asset Error** : AppIcon 관련 오류가 뜬다면, PS_AR 폴더안 Assets에서 AppIcon을 지우고 우클릭 New AppIcon을 만들어주세요.
+- 위 절차를 잘 따르면 오류가 나지 않는 것으로 확인했습니다. 오류가 발생한다면 연락주시면 감사하겠습니다.
   
 #### 실행 방법
 
