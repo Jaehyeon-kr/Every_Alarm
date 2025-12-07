@@ -277,7 +277,7 @@ pip 패키지 관리자
 
 ```bash
 git clone https://github.com/Jaehyeon-kr/Every_Alarm.git
-cd Personalize_Alarm
+cd Every_Alarm
 ```
 
 ### 2. 필수 패키지 설치
@@ -841,7 +841,5 @@ graph LR
 <div align="center">
 
 **⭐ 이 프로젝트가 도움이 되셨다면 Star를 눌러주세요!**
-
-Made with ❤️ by Personalize Alarm Team
 
 </div>
